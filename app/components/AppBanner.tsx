@@ -52,8 +52,94 @@ export default function AppBanner() {
       ref={ref}
       className="relative py-16 md:py-24 section-padding overflow-hidden bg-gradient-to-br from-gray-50 to-white"
     >
-      {/* Background decorative elements */}
+      {/* Animated Background Swirl */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Main flowing swirl */}
+        <motion.div
+          animate={{
+            x: ['-100%', '100%'],
+            rotate: [0, 360]
+          }}
+          transition={{
+            x: { duration: 20, repeat: Infinity, ease: "linear" },
+            rotate: { duration: 30, repeat: Infinity, ease: "linear" }
+          }}
+          className="absolute top-1/4 left-0 w-96 h-96"
+        >
+          <svg viewBox="0 0 400 400" className="w-full h-full">
+            <defs>
+              <linearGradient id="swirlGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#E95744" stopOpacity="0.1" />
+                <stop offset="50%" stopColor="#32BBAA" stopOpacity="0.15" />
+                <stop offset="100%" stopColor="#E95744" stopOpacity="0.1" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M50,200 Q150,50 250,200 T450,200 Q350,350 250,200 T50,200"
+              fill="url(#swirlGradient1)"
+              className="opacity-60"
+            />
+          </svg>
+        </motion.div>
+
+        {/* Secondary swirl */}
+        <motion.div
+          animate={{
+            x: ['100%', '-100%'],
+            rotate: [360, 0]
+          }}
+          transition={{
+            x: { duration: 25, repeat: Infinity, ease: "linear" },
+            rotate: { duration: 35, repeat: Infinity, ease: "linear" }
+          }}
+          className="absolute bottom-1/4 right-0 w-80 h-80"
+        >
+          <svg viewBox="0 0 320 320" className="w-full h-full">
+            <defs>
+              <linearGradient id="swirlGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#32BBAA" stopOpacity="0.08" />
+                <stop offset="50%" stopColor="#F5EDE2" stopOpacity="0.12" />
+                <stop offset="100%" stopColor="#32BBAA" stopOpacity="0.08" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M40,160 Q120,40 200,160 T360,160 Q280,280 200,160 T40,160"
+              fill="url(#swirlGradient2)"
+              className="opacity-50"
+            />
+          </svg>
+        </motion.div>
+
+        {/* Flowing wave pattern */}
+        <motion.div
+          animate={{
+            x: ['-50%', '150%']
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className="absolute top-1/2 left-0 w-full h-32"
+        >
+          <svg viewBox="0 0 1200 128" className="w-full h-full">
+            <defs>
+              <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#E95744" stopOpacity="0.05" />
+                <stop offset="25%" stopColor="#32BBAA" stopOpacity="0.1" />
+                <stop offset="50%" stopColor="#F5EDE2" stopOpacity="0.08" />
+                <stop offset="75%" stopColor="#32BBAA" stopOpacity="0.1" />
+                <stop offset="100%" stopColor="#E95744" stopOpacity="0.05" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M0,64 Q300,20 600,64 T1200,64 L1200,128 L0,128 Z"
+              fill="url(#waveGradient)"
+            />
+          </svg>
+        </motion.div>
+
+        {/* Decorative floating elements */}
         <motion.div
           style={{ y: useTransform(scrollYProgress, [0, 1], [50, -50]) }}
           className="absolute top-10 left-10 w-32 h-32 bg-hooman-orange/5 rounded-full blur-3xl"
@@ -104,38 +190,8 @@ export default function AppBanner() {
                   priority
                 />
                 
-                {/* Overlay gradient for better text readability */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
-                {/* Interactive elements overlay */}
-                <div className="absolute inset-0 flex items-center justify-end pr-8 md:pr-16">
-                  <motion.div
-                    initial={{ opacity: 0, x: 30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, delay: 0.5 }}
-                    viewport={{ once: true }}
-                    className="text-right"
-                  >
-                    {/* Call-to-action hint */}
-                    <motion.div
-                      animate={{ 
-                        y: [0, -5, 0],
-                        opacity: [0.7, 1, 0.7]
-                      }}
-                      transition={{ 
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                      className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-hooman-orange px-4 py-2 rounded-full text-sm font-medium shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    >
-                      <span>Coming Soon</span>
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                      </svg>
-                    </motion.div>
-                  </motion.div>
-                </div>
+                {/* Overlay gradient for better visual depth */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </motion.div>
             </div>
 
