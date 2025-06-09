@@ -49,4 +49,13 @@
   .body-medium {
     @apply text-base md:text-lg leading-relaxed;
   }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 } 

@@ -299,7 +299,7 @@ export default function WaitlistSignup() {
             Get Early Access to the{' '}
             <span className="relative">
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
-                Pet World's Smartest AI
+                 World's Smartest Pet AI App
               </span>
               <motion.div
                 className="absolute bottom-2 left-0 w-full h-2 bg-gradient-to-r from-blue-400 to-purple-500 opacity-30"
