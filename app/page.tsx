@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Hero from './components/Hero'
 import WaitlistSignup from './components/WaitlistSignup'
 import MeetEzra from './components/MeetEzra'
+import AppBanner from './components/AppBanner'
 
 export default function HomePage() {
   return (
@@ -11,6 +12,7 @@ export default function HomePage() {
       <Hero />
       <WaitlistSignup />
       <MeetEzra />
+      <AppBanner />
     </main>
   )
 } 
