@@ -8,8 +8,9 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      duration: 0.8,
-      staggerChildren: 0.2
+      duration: 1.2,
+      staggerChildren: 0.3,
+      ease: "easeOut"
     }
   }
 }
@@ -17,41 +18,64 @@ const containerVariants = {
 const cardVariants = {
   hidden: { 
     opacity: 0, 
-    y: 30,
-    scale: 0.95
+    y: 60,
+    scale: 0.9,
+    rotateX: 15
   },
   visible: { 
     opacity: 1, 
     y: 0,
     scale: 1,
+    rotateX: 0,
     transition: {
-      duration: 0.6,
-      ease: "easeOut"
+      duration: 1.0,
+      ease: [0.25, 0.46, 0.45, 0.94], // Custom cubic-bezier for super smooth animation
+      type: "spring",
+      stiffness: 100,
+      damping: 15
     }
   }
 }
 
 const badgeVariants = {
-  hidden: { opacity: 0, y: -20 },
+  hidden: { opacity: 0, y: -30, scale: 0.8 },
   visible: { 
     opacity: 1, 
     y: 0,
+    scale: 1,
     transition: {
-      duration: 0.6,
-      ease: "easeOut"
+      duration: 0.8,
+      ease: "easeOut",
+      type: "spring",
+      stiffness: 200,
+      damping: 20
     }
   }
 }
 
 const textVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 30 },
   visible: { 
     opacity: 1, 
     y: 0,
     transition: {
-      duration: 0.8,
+      duration: 1.0,
       ease: "easeOut",
       delay: 0.2
+    }
+  }
+}
+
+const phoneVariants = {
+  hidden: { opacity: 0, scale: 0.8, y: 50 },
+  visible: { 
+    opacity: 1, 
+    scale: 1, 
+    y: 0,
+    transition: {
+      duration: 1.2,
+      ease: "easeOut",
+      delay: 0.5
     }
   }
 }
@@ -64,7 +88,7 @@ export default function MeetEzra() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-150px" }}
           className="text-center mb-16"
         >
           {/* Badge - consistent with waitlist */}
@@ -99,26 +123,26 @@ export default function MeetEzra() {
           </motion.p>
         </motion.div>
 
-        {/* Feature Cards Layout - Exact Figma dimensions */}
+        {/* Feature Cards Layout - Exact Figma dimensions with super smooth animations */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, margin: "-100px" }}
           className="space-y-6"
         >
           {/* First Row: Large card (710x688) + Medium card (568x688) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            {/* Card 1: Personalised Care Prompts - Large (710x688) */}
+            {/* Card 1: Personalised Care Prompts - Large (710x688) with iPhone prototypes */}
             <motion.div
               variants={cardVariants}
               whileHover={{ 
                 scale: 1.02,
-                y: -5,
-                boxShadow: "0 25px 50px rgba(0, 0, 0, 0.15)",
-                transition: { duration: 0.3 }
+                y: -8,
+                boxShadow: "0 30px 60px rgba(0, 0, 0, 0.2)",
+                transition: { duration: 0.4, ease: "easeOut" }
               }}
-              className="lg:col-span-7 bg-hooman-beige rounded-xl p-8 border border-gray-100 transition-all duration-300 group cursor-pointer relative overflow-hidden"
+              className="lg:col-span-7 bg-hooman-beige rounded-xl p-8 border border-gray-100 transition-all duration-500 group cursor-pointer relative overflow-hidden"
               style={{ minHeight: '688px' }}
             >
               {/* Content at top */}
@@ -131,53 +155,39 @@ export default function MeetEzra() {
                 </p>
               </div>
 
-              {/* Coaching Impact Mockup - blended into background */}
-              <div className="absolute bottom-0 left-0 right-0 p-8">
-                <div className="text-center">
-                  <div className="text-lg font-semibold text-gray-800 mb-6">Coaching Impact</div>
+              {/* iPhone Prototype Images - blended into background */}
+              <div className="absolute bottom-8 left-8 right-8">
+                <div className="flex justify-center gap-6">
+                  {/* iPhone 1 */}
+                  <motion.div
+                    variants={phoneVariants}
+                    className="relative"
+                  >
+                    <Image
+                      src="/images/images-body/iPhone X Dark 1.png"
+                      alt="Ezra AI Chat Interface"
+                      width={200}
+                      height={400}
+                      className="drop-shadow-2xl"
+                      priority
+                    />
+                  </motion.div>
                   
-                  {/* Progress bars */}
-                  <div className="space-y-4">
-                    <div className="text-left">
-                      <div className="flex justify-between text-sm text-gray-600 mb-2">
-                        <span>Week 49</span>
-                        <span>86%</span>
-                      </div>
-                      <div className="w-full bg-white/50 rounded-full h-3">
-                        <div className="bg-gray-400 h-3 rounded-full" style={{width: '86%'}}></div>
-                      </div>
-                    </div>
-                    <div className="text-left">
-                      <div className="flex justify-between text-sm text-gray-600 mb-2">
-                        <span>Week 50</span>
-                        <span>83%</span>
-                      </div>
-                      <div className="w-full bg-white/50 rounded-full h-3">
-                        <div className="bg-gray-400 h-3 rounded-full" style={{width: '83%'}}></div>
-                      </div>
-                    </div>
-                    
-                    <div className="text-sm text-gray-500 mt-6 mb-4">After Coaching</div>
-                    
-                    <div className="text-left">
-                      <div className="flex justify-between text-sm text-gray-600 mb-2">
-                        <span>Week 49</span>
-                        <span>88%</span>
-                      </div>
-                      <div className="w-full bg-white/50 rounded-full h-3">
-                        <div className="bg-hooman-orange h-3 rounded-full" style={{width: '88%'}}></div>
-                      </div>
-                    </div>
-                    <div className="text-left">
-                      <div className="flex justify-between text-sm text-gray-600 mb-2">
-                        <span>Week 50</span>
-                        <span>91%</span>
-                      </div>
-                      <div className="w-full bg-white/50 rounded-full h-3">
-                        <div className="bg-hooman-orange h-3 rounded-full" style={{width: '91%'}}></div>
-                      </div>
-                    </div>
-                  </div>
+                  {/* iPhone 2 */}
+                  <motion.div
+                    variants={phoneVariants}
+                    className="relative"
+                    style={{ animationDelay: '0.2s' }}
+                  >
+                    <Image
+                      src="/images/images-body/iPhone X Dark 4.png"
+                      alt="Ezra AI Features"
+                      width={200}
+                      height={400}
+                      className="drop-shadow-2xl"
+                      priority
+                    />
+                  </motion.div>
                 </div>
               </div>
             </motion.div>
@@ -187,11 +197,11 @@ export default function MeetEzra() {
               variants={cardVariants}
               whileHover={{ 
                 scale: 1.02,
-                y: -5,
-                boxShadow: "0 25px 50px rgba(0, 0, 0, 0.15)",
-                transition: { duration: 0.3 }
+                y: -8,
+                boxShadow: "0 30px 60px rgba(0, 0, 0, 0.2)",
+                transition: { duration: 0.4, ease: "easeOut" }
               }}
-              className="lg:col-span-5 bg-hooman-beige rounded-xl p-8 border border-gray-100 transition-all duration-300 group cursor-pointer relative overflow-hidden"
+              className="lg:col-span-5 bg-hooman-beige rounded-xl p-8 border border-gray-100 transition-all duration-500 group cursor-pointer relative overflow-hidden"
               style={{ minHeight: '688px' }}
             >
               {/* Content at top */}
@@ -205,10 +215,16 @@ export default function MeetEzra() {
               </div>
 
               {/* Charts Mockup - blended into background */}
-              <div className="absolute bottom-8 left-8 right-8">
+              <motion.div 
+                className="absolute bottom-8 left-8 right-8"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                viewport={{ once: true }}
+              >
                 <div className="text-lg font-semibold text-gray-800 mb-6 text-center">Target vs Reality</div>
                 
-                {/* Bar Chart */}
+                {/* Bar Chart with staggered animation */}
                 <div className="flex justify-between items-end space-x-2 h-32 mb-6">
                   {[
                     {height: 60, color: 'bg-red-400', month: 'Jan'},
@@ -220,17 +236,30 @@ export default function MeetEzra() {
                     {height: 95, color: 'bg-red-400', month: 'July'}
                   ].map((bar, i) => (
                     <div key={i} className="flex flex-col items-center flex-1">
-                      <div 
-                        className={`${bar.color} rounded-t w-full transition-all duration-500`}
-                        style={{ height: `${bar.height}%` }}
+                      <motion.div 
+                        className={`${bar.color} rounded-t w-full`}
+                        initial={{ height: 0 }}
+                        whileInView={{ height: `${bar.height}%` }}
+                        transition={{ 
+                          duration: 0.8, 
+                          delay: 0.8 + (i * 0.1),
+                          ease: "easeOut"
+                        }}
+                        viewport={{ once: true }}
                       />
                       <div className="text-xs text-gray-500 mt-2">{bar.month}</div>
                     </div>
                   ))}
                 </div>
                 
-                {/* Stats */}
-                <div className="space-y-3">
+                {/* Stats with fade-in animation */}
+                <motion.div 
+                  className="space-y-3"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 1.5 }}
+                  viewport={{ once: true }}
+                >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 bg-red-400 rounded-full"></div>
@@ -247,8 +276,8 @@ export default function MeetEzra() {
                     </div>
                     <span className="text-lg font-bold text-orange-500">12,122</span>
                   </div>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </motion.div>
           </div>
 
@@ -259,11 +288,11 @@ export default function MeetEzra() {
               variants={cardVariants}
               whileHover={{ 
                 scale: 1.02,
-                y: -5,
-                boxShadow: "0 25px 50px rgba(0, 0, 0, 0.15)",
-                transition: { duration: 0.3 }
+                y: -8,
+                boxShadow: "0 30px 60px rgba(0, 0, 0, 0.2)",
+                transition: { duration: 0.4, ease: "easeOut" }
               }}
-              className="lg:col-span-5 bg-hooman-beige rounded-xl p-8 border border-gray-100 transition-all duration-300 group cursor-pointer relative overflow-hidden"
+              className="lg:col-span-5 bg-hooman-beige rounded-xl p-8 border border-gray-100 transition-all duration-500 group cursor-pointer relative overflow-hidden"
               style={{ minHeight: '752px' }}
             >
               {/* Content at top */}
@@ -277,8 +306,14 @@ export default function MeetEzra() {
               </div>
 
               {/* Mobile Mockup - blended into background */}
-              <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-                <div className="bg-gray-800 rounded-2xl p-4 w-48 h-80 relative shadow-lg">
+              <motion.div 
+                className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+                initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 1.0, delay: 0.4, ease: "easeOut" }}
+                viewport={{ once: true }}
+              >
+                <div className="bg-gray-800 rounded-2xl p-4 w-48 h-80 relative shadow-2xl">
                   <div className="bg-white rounded-lg h-full p-4 flex flex-col">
                     <div className="flex justify-center mb-3">
                       <div className="w-12 h-1 bg-gray-300 rounded-full"></div>
@@ -294,7 +329,7 @@ export default function MeetEzra() {
                     {/* Document Summary */}
                     <div className="text-sm font-semibold text-gray-800 mb-4">Document Summary</div>
                     
-                    {/* Circular progress */}
+                    {/* Circular progress with animation */}
                     <div className="flex items-center justify-center mb-4">
                       <div className="relative w-20 h-20">
                         <svg className="w-20 h-20 transform -rotate-90" viewBox="0 0 36 36">
@@ -304,17 +339,29 @@ export default function MeetEzra() {
                             stroke="#E5E7EB"
                             strokeWidth="2"
                           />
-                          <path
+                          <motion.path
                             d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                             fill="none"
                             stroke="#F97316"
                             strokeWidth="2"
                             strokeDasharray="54, 100"
+                            initial={{ pathLength: 0 }}
+                            whileInView={{ pathLength: 1 }}
+                            transition={{ duration: 1.5, delay: 0.8 }}
+                            viewport={{ once: true }}
                           />
                         </svg>
                         <div className="absolute inset-0 flex items-center justify-center">
                           <div className="text-center">
-                            <div className="text-xl font-bold text-gray-800">20</div>
+                            <motion.div 
+                              className="text-xl font-bold text-gray-800"
+                              initial={{ opacity: 0 }}
+                              whileInView={{ opacity: 1 }}
+                              transition={{ delay: 1.2 }}
+                              viewport={{ once: true }}
+                            >
+                              20
+                            </motion.div>
                             <div className="text-xs text-gray-600">Document</div>
                           </div>
                         </div>
@@ -338,7 +385,7 @@ export default function MeetEzra() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
 
             {/* Card 4: Vet Visits, Organised Automatically - Large (710x752) */}
@@ -346,11 +393,11 @@ export default function MeetEzra() {
               variants={cardVariants}
               whileHover={{ 
                 scale: 1.02,
-                y: -5,
-                boxShadow: "0 25px 50px rgba(0, 0, 0, 0.15)",
-                transition: { duration: 0.3 }
+                y: -8,
+                boxShadow: "0 30px 60px rgba(0, 0, 0, 0.2)",
+                transition: { duration: 0.4, ease: "easeOut" }
               }}
-              className="lg:col-span-7 bg-hooman-beige rounded-xl p-8 border border-gray-100 transition-all duration-300 group cursor-pointer relative overflow-hidden"
+              className="lg:col-span-7 bg-hooman-beige rounded-xl p-8 border border-gray-100 transition-all duration-500 group cursor-pointer relative overflow-hidden"
               style={{ minHeight: '752px' }}
             >
               {/* Content at top */}
@@ -364,8 +411,20 @@ export default function MeetEzra() {
               </div>
 
               {/* POS System Mockup - blended into background */}
-              <div className="absolute bottom-8 left-8 right-8">
-                <div className="bg-gray-800 rounded-lg p-6 mb-6">
+              <motion.div 
+                className="absolute bottom-8 left-8 right-8"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.0, delay: 0.3, ease: "easeOut" }}
+                viewport={{ once: true }}
+              >
+                <motion.div 
+                  className="bg-gray-800 rounded-lg p-6 mb-6"
+                  initial={{ scale: 0.9 }}
+                  whileInView={{ scale: 1 }}
+                  transition={{ duration: 0.8, delay: 0.5 }}
+                  viewport={{ once: true }}
+                >
                   <div className="flex items-center justify-between text-white mb-6">
                     <span className="text-xl font-semibold">POS System</span>
                     <div className="flex gap-2">
@@ -377,28 +436,57 @@ export default function MeetEzra() {
                   
                   <div className="text-white">
                     <div className="text-2xl font-bold mb-2">Spending trend</div>
-                    <div className="text-5xl font-bold">87%</div>
+                    <motion.div 
+                      className="text-5xl font-bold"
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.8, delay: 0.8 }}
+                      viewport={{ once: true }}
+                    >
+                      87%
+                    </motion.div>
                   </div>
-                </div>
+                </motion.div>
                 
                 <div className="flex justify-between items-center mb-6">
                   <span className="text-xl font-semibold text-gray-800">Total Invoice</span>
                   <div className="text-right">
-                    <div className="text-3xl font-bold text-gray-800">520</div>
+                    <motion.div 
+                      className="text-3xl font-bold text-gray-800"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 1.0 }}
+                      viewport={{ once: true }}
+                    >
+                      520
+                    </motion.div>
                     <div className="text-sm text-green-500">+12%</div>
                   </div>
                 </div>
                 
-                {/* Chart area */}
+                {/* Chart area with animated path */}
                 <div className="h-20 bg-orange-100 rounded-lg flex items-end justify-center p-4 mb-6">
                   <svg width="120" height="50" viewBox="0 0 120 50">
-                    <path
+                    <motion.path
                       d="M 10 40 Q 30 15 50 25 T 90 20 T 110 30"
                       stroke="#F97316"
                       strokeWidth="3"
                       fill="none"
+                      initial={{ pathLength: 0 }}
+                      whileInView={{ pathLength: 1 }}
+                      transition={{ duration: 2.0, delay: 1.2, ease: "easeInOut" }}
+                      viewport={{ once: true }}
                     />
-                    <circle cx="110" cy="30" r="5" fill="#F97316" />
+                    <motion.circle 
+                      cx="110" 
+                      cy="30" 
+                      r="5" 
+                      fill="#F97316"
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      transition={{ duration: 0.5, delay: 2.5 }}
+                      viewport={{ once: true }}
+                    />
                   </svg>
                 </div>
                 
@@ -406,7 +494,7 @@ export default function MeetEzra() {
                   <div className="text-xl font-semibold text-gray-800">24 june</div>
                   <div className="text-3xl text-gray-400">$39</div>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </motion.div>
