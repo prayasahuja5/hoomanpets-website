@@ -28,7 +28,7 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo Section */}
-            <div className="flex items-center gap-3">
+            <a href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity duration-200">
               {/* PNG Logo */}
               <div className="w-10 h-10 flex items-center justify-center">
                 <img 
@@ -37,10 +37,15 @@ export default function Header() {
                   className="w-10 h-10 object-contain"
                 />
               </div>
-              <div className="font-urbanist text-display-4 font-bold text-neutral-800 lowercase">
-                hooman
+              <div className="flex flex-col">
+                <div className="font-urbanist text-display-4 font-bold text-neutral-800 lowercase leading-none">
+                  hooman
+                </div>
+                <div className="font-urbanist text-display-1 text-neutral-600 font-medium leading-tight">
+                  Smarter pet parenting
+                </div>
               </div>
-            </div>
+            </a>
 
             {/* Right Section - Navigation and Menu */}
             <div className="flex items-center gap-8">
@@ -73,9 +78,8 @@ export default function Header() {
               </nav>
 
               {/* Download Button */}
-              <button className="hidden sm:flex items-center gap-2 bg-black hover:bg-gray-800 text-white font-urbanist text-display-2 font-medium px-6 py-2 rounded-lg shadow-small hover:shadow-regular transition-all duration-300">
-                <span className="text-white text-lg">🐾</span>
-                download hooman
+              <button className="hidden sm:flex items-center bg-black hover:bg-gray-800 text-white font-urbanist text-display-2 font-medium px-6 py-3 rounded-full shadow-small hover:shadow-regular transition-all duration-300">
+                hooman pets
               </button>
 
               {/* Hamburger Menu Button */}
