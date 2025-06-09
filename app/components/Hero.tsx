@@ -86,14 +86,14 @@ export default function Hero() {
           </motion.div>
 
           {/* Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="font-urbanist text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-10 leading-tight"
-          >
-            Smarter pet parenting, powered by AI and built with care.
-          </motion.h1>
+                      <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="font-urbanist text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-10 leading-relaxed"
+            >
+              Smarter pet parenting,<br />powered by AI and<br />built with care.
+            </motion.h1>
 
           {/* CTA Buttons */}
           <motion.div

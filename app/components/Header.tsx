@@ -39,7 +39,7 @@ export default function Header() {
               </div>
               <div className="flex flex-col">
                 <div className="font-urbanist text-display-4 font-bold text-neutral-800 lowercase leading-none">
-                  hooman
+                  hooman pets
                 </div>
                 <div className="font-urbanist text-display-1 text-neutral-600 font-medium leading-tight">
                   Smarter pet parenting
@@ -79,7 +79,7 @@ export default function Header() {
 
               {/* Download Button */}
               <button className="hidden sm:flex items-center bg-black hover:bg-gray-800 text-white font-urbanist text-display-2 font-medium px-6 py-3 rounded-full shadow-small hover:shadow-regular transition-all duration-300">
-                hooman pets
+                download hooman
               </button>
 
               {/* Hamburger Menu Button */}
