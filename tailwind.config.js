@@ -100,6 +100,9 @@ module.exports = {
         '88': '22rem',
         '128': '32rem',
       },
+      borderWidth: {
+        '3': '3px',
+      },
     },
   },
   plugins: [],

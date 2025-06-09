@@ -102,13 +102,35 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 items-start"
           >
-            <button className="font-urbanist bg-[#E95744] text-white px-8 py-4 rounded-full text-lg font-semibold hover:brightness-110 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-              Join the Waitlist
-            </button>
-            <button className="font-urbanist border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105">
-              How Hooman Works
-            </button>
-                      </motion.div>
+            <motion.button 
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 20px 40px rgba(233, 87, 68, 0.4)",
+                y: -2
+              }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              className="font-urbanist bg-[#E95744] text-white px-8 py-4 rounded-full text-lg font-semibold hover:brightness-110 transition-all duration-300 shadow-lg relative overflow-hidden group"
+            >
+              <span className="relative z-10">Join the Waitlist</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -skew-x-12 group-hover:translate-x-full transition-all duration-700"></div>
+            </motion.button>
+            <motion.button 
+              whileHover={{ 
+                scale: 1.05,
+                backgroundColor: "rgba(255,255,255,0.95)",
+                color: "#000",
+                boxShadow: "0 10px 30px rgba(255,255,255,0.3)",
+                y: -2
+              }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              className="font-urbanist border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 relative overflow-hidden group"
+            >
+              <span className="relative z-10">How Hooman Works</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-100 to-transparent opacity-0 group-hover:opacity-30 transform -skew-x-12 group-hover:translate-x-full transition-all duration-700"></div>
+            </motion.button>
+          </motion.div>
           </div>
         </div>
       </div>
