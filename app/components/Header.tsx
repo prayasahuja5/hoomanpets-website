@@ -1,23 +1,41 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import AnimatedLink from './AnimatedLink'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
     <>
       {/* Sticky Header */}
-      <header className="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-white/80 backdrop-blur-md shadow-medium' 
+          : 'bg-white shadow-sm'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo Section */}
             <div className="flex items-center gap-3">
-              {/* Logo with colored blocks */}
-              <div className="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center shadow-primary-small">
-                <span className="text-white font-bold text-lg">🐾</span>
+              {/* PNG Logo */}
+              <div className="w-10 h-10 flex items-center justify-center">
+                <img 
+                  src="/images/logos/hooman-logo.png" 
+                  alt="Hooman Logo" 
+                  className="w-10 h-10 object-contain"
+                />
               </div>
               <div className="font-urbanist text-display-4 font-bold text-neutral-800 lowercase">
                 hooman
@@ -55,7 +73,8 @@ export default function Header() {
               </nav>
 
               {/* Download Button */}
-              <button className="hidden sm:block bg-secondary-200 hover:bg-secondary-300 text-white font-urbanist text-display-2 font-medium px-6 py-2 rounded-lg shadow-small hover:shadow-regular transition-all duration-300">
+              <button className="hidden sm:flex items-center gap-2 bg-black hover:bg-gray-800 text-white font-urbanist text-display-2 font-medium px-6 py-2 rounded-lg shadow-small hover:shadow-regular transition-all duration-300">
+                <span className="text-white text-lg">🐾</span>
                 download hooman
               </button>
 
