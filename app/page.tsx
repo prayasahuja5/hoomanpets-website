@@ -4,6 +4,7 @@ import Hero from './components/Hero'
 import WaitlistSignup from './components/WaitlistSignup'
 import MeetEzra from './components/MeetEzra'
 import WhyUs from './components/WhyUs'
+import Testimonials from './components/Testimonials'
 import AppBanner from './components/AppBanner'
 
 export default function HomePage() {
@@ -15,6 +16,7 @@ export default function HomePage() {
       <MeetEzra />
       <AppBanner />
       <WhyUs />
+      <Testimonials />
     </main>
   )
 } 
