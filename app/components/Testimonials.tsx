@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 
-// Testimonial data - back to original pet-focused content
+// Testimonial data - original pet-focused content
 const testimonials = [
   {
     id: 1,
@@ -49,8 +49,8 @@ const testimonials = [
   }
 ]
 
-// Create duplicated array for seamless loop
-const duplicatedTestimonials = [...testimonials, ...testimonials]
+// Create duplicated arrays for seamless infinite scroll
+const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials]
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -93,191 +93,139 @@ const textVariants = {
   }
 }
 
+// Testimonial Card Component
+const TestimonialCard = ({ testimonial, index }: { testimonial: any, index: number }) => (
+  <div className="bg-[#F5EDE2] text-[#1C1C1E] rounded-xl p-6 w-[300px] min-w-[300px] shadow-md hover:scale-105 hover:shadow-lg transition-transform duration-300 ease-in-out">
+    <div className="flex items-center space-x-4 mb-4">
+      <Image
+        src={testimonial.avatar}
+        alt={`Avatar of ${testimonial.name}`}
+        width={40}
+        height={40}
+        className="w-10 h-10 rounded-full object-cover"
+      />
+      <div>
+        <p className="font-semibold text-[#1C1C1E]">{testimonial.name}</p>
+        <p className="text-sm text-[#7A7A7A]">{testimonial.tagline}</p>
+      </div>
+    </div>
+    <p className="text-sm leading-relaxed text-[#1C1C1E]">"{testimonial.text}"</p>
+  </div>
+)
+
 export default function Testimonials() {
   return (
-    <section className="bg-[#27221F] py-16 md:py-24 section-padding overflow-hidden">
-      <div className="container-max">
+    <section className="bg-[#1C1C1E] text-white py-24 px-6 overflow-hidden">
+      <div className="max-w-7xl mx-auto text-center">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-150px" }}
-          className="text-center mb-16"
         >
           {/* Badge */}
-          <motion.div
-            variants={badgeVariants}
-            className="mb-8"
-          >
-            <motion.span 
-              whileHover={{ scale: 1.05 }}
-              className="inline-flex items-center gap-2 bg-hooman-orange text-white px-6 py-3 rounded-full text-sm font-medium tracking-wide shadow-xl border border-hooman-orange/20"
-            >
-              <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-              Testimonials
-            </motion.span>
+          <motion.div variants={badgeVariants}>
+            <span className="inline-block bg-[#E95744] text-white text-sm px-3 py-1 rounded-full uppercase font-medium tracking-wide">
+              Testimonial
+            </span>
           </motion.div>
 
-          {/* Headline */}
+          {/* Heading */}
           <motion.h2
             variants={textVariants}
-            className="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight"
+            className="text-4xl md:text-5xl font-extrabold mt-6"
           >
-            Just hear what other <br />
-            pet parents are saying
+            Just hear what they're saying about us
           </motion.h2>
 
           {/* Subheading */}
           <motion.p
             variants={textVariants}
-            className="text-base md:text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto"
+            className="text-gray-400 max-w-2xl mx-auto mt-4"
           >
-            Real stories from real people — using Hooman to care smarter, stress less, and feel supported every day.
+            Discover how Hooman helps pet parents feel supported, stay consistent, and get peace of mind — all powered by Ezra.
           </motion.p>
         </motion.div>
+      </div>
 
-        {/* Horizontal Scrolling Marquee */}
-        <div className="relative">
-          {/* Gradient overlays for smooth fade effect */}
-          <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-[#27221F] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-[#27221F] to-transparent z-10 pointer-events-none" />
-          
-          {/* Auto-scrolling container */}
-          <div className="flex gap-6 animate-marquee hover:pause-marquee">
-            {duplicatedTestimonials.map((testimonial, index) => (
-              <motion.div
-                key={`${testimonial.id}-${index}`}
-                whileHover={{ 
-                  scale: 1.05,
-                  y: -10,
-                  rotateY: 5,
-                  boxShadow: "0 25px 50px rgba(233, 87, 68, 0.3)",
-                  backgroundColor: "rgba(255, 255, 255, 0.95)",
-                  transition: { duration: 0.3, ease: "easeOut" }
-                }}
-                className="flex-none w-80 bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-2xl transition-all duration-300 group cursor-pointer border border-white/20 hover:border-hooman-orange/30"
-              >
-                {/* Avatar and Info */}
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="relative">
-                    <motion.div
-                      whileHover={{ 
-                        scale: 1.2,
-                        rotate: 5,
-                        boxShadow: "0 8px 20px rgba(233, 87, 68, 0.4)"
-                      }}
-                      transition={{ duration: 0.2 }}
-                      className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-hooman-orange/20 group-hover:ring-hooman-orange/50 transition-all duration-300"
-                    >
-                      <Image
-                        src={testimonial.avatar}
-                        alt={`${testimonial.name} avatar`}
-                        width={48}
-                        height={48}
-                        className="w-full h-full object-cover"
-                      />
-                    </motion.div>
-                    {/* Online indicator */}
-                    <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white shadow-sm group-hover:scale-110 transition-transform duration-200" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-[#1C1C1E] text-lg group-hover:text-hooman-orange transition-colors duration-300">
-                      {testimonial.name}
-                    </h3>
-                    <p className="text-sm text-gray-500 font-medium group-hover:text-gray-600 transition-colors duration-300">
-                      {testimonial.tagline}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Testimonial Text */}
-                <div className="relative">
-                  <p className="text-[#1C1C1E] text-base leading-relaxed font-medium group-hover:text-gray-800 transition-colors duration-300">
-                    "{testimonial.text}"
-                  </p>
-                  
-                  {/* Quote decoration */}
-                  <div className="absolute -top-3 -left-2 text-6xl text-hooman-orange/20 font-serif leading-none group-hover:text-hooman-orange/40 transition-colors duration-300">
-                    "
-                  </div>
-                </div>
-
-                {/* Tech-style bottom accent */}
-                <div className="mt-4 h-1 bg-gradient-to-r from-hooman-orange/20 via-hooman-teal/20 to-transparent rounded-full group-hover:from-hooman-orange/60 group-hover:via-hooman-teal/60 transition-all duration-300" />
-              </motion.div>
-            ))}
-          </div>
+      {/* Marquee Rows */}
+      <div className="relative mt-16 space-y-6">
+        {/* Row 1 - Left to Right */}
+        <div className="flex space-x-6 animate-marquee">
+          {duplicatedTestimonials.map((testimonial, index) => (
+            <TestimonialCard 
+              key={`row1-${testimonial.id}-${index}`} 
+              testimonial={testimonial} 
+              index={index} 
+            />
+          ))}
         </div>
 
-        {/* Mobile optimized version */}
-        <div className="block md:hidden mt-8">
-          <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 -mx-6 px-6">
-            {testimonials.map((testimonial) => (
-              <motion.div
-                key={`mobile-${testimonial.id}`}
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="flex-none w-80 bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-2xl snap-start border border-white/20"
-              >
-                {/* Avatar and Info */}
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="relative">
-                    <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-hooman-orange/20">
-                      <Image
-                        src={testimonial.avatar}
-                        alt={`${testimonial.name} avatar`}
-                        width={48}
-                        height={48}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white shadow-sm" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-[#1C1C1E] text-lg">
-                      {testimonial.name}
-                    </h3>
-                    <p className="text-sm text-gray-500 font-medium">
-                      {testimonial.tagline}
-                    </p>
-                  </div>
-                </div>
+        {/* Row 2 - Right to Left (offset + opposite direction) */}
+        <div className="flex space-x-6 animate-marquee-reverse mt-4 md:ml-20">
+          {duplicatedTestimonials.map((testimonial, index) => (
+            <TestimonialCard 
+              key={`row2-${testimonial.id}-${index}`} 
+              testimonial={testimonial} 
+              index={index} 
+            />
+          ))}
+        </div>
+      </div>
 
-                {/* Testimonial Text */}
-                <div className="relative">
-                  <p className="text-[#1C1C1E] text-base leading-relaxed font-medium">
-                    "{testimonial.text}"
-                  </p>
-                  <div className="absolute -top-3 -left-2 text-6xl text-hooman-orange/20 font-serif leading-none">
-                    "
-                  </div>
+      {/* Mobile Version - Single Scrollable Row */}
+      <div className="block md:hidden mt-8">
+        <div className="flex space-x-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 -mx-6 px-6">
+          {testimonials.map((testimonial) => (
+            <div
+              key={`mobile-${testimonial.id}`}
+              className="bg-[#F5EDE2] text-[#1C1C1E] rounded-xl p-6 w-[260px] min-w-[260px] shadow-md snap-start"
+            >
+              <div className="flex items-center space-x-4 mb-4">
+                <Image
+                  src={testimonial.avatar}
+                  alt={`Avatar of ${testimonial.name}`}
+                  width={40}
+                  height={40}
+                  className="w-10 h-10 rounded-full object-cover"
+                />
+                <div>
+                  <p className="font-semibold text-[#1C1C1E]">{testimonial.name}</p>
+                  <p className="text-sm text-[#7A7A7A]">{testimonial.tagline}</p>
                 </div>
-
-                <div className="mt-4 h-1 bg-gradient-to-r from-hooman-orange/20 via-hooman-teal/20 to-transparent rounded-full" />
-              </motion.div>
-            ))}
-          </div>
+              </div>
+              <p className="text-sm leading-relaxed text-[#1C1C1E]">"{testimonial.text}"</p>
+            </div>
+          ))}
         </div>
       </div>
 
       <style jsx>{`
         @keyframes marquee {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-100%); }
+        }
+
+        @keyframes marquee-reverse {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(0); }
         }
 
         .animate-marquee {
           animation: marquee 30s linear infinite;
         }
 
-        .hover\\:pause-marquee:hover {
-          animation-play-state: paused;
+        .animate-marquee-reverse {
+          animation: marquee-reverse 35s linear infinite;
+        }
+
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
         }
       `}</style>
     </section>
