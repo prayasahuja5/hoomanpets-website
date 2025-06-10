@@ -297,7 +297,7 @@ export default function BlogAndFAQ() {
       </div>
 
       {/* FAQ SECTION */}
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -337,18 +337,18 @@ export default function BlogAndFAQ() {
               We&apos;re here to make pet care easy and stress-free. Explore our FAQs for quick answers to common questions about our services, pricing, and more.
             </motion.p>
 
-            {/* CTA Button */}
-            <motion.div
-              variants={textVariants}
-            >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="btn-primary"
-              >
-                Get Early Access
-              </motion.button>
-            </motion.div>
+                         {/* CTA Button */}
+             <motion.div
+               variants={textVariants}
+             >
+               <motion.button
+                 whileHover={{ scale: 1.05 }}
+                 whileTap={{ scale: 0.95 }}
+                 className="bg-black text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition-all duration-300 hover:shadow-lg hover:scale-105"
+               >
+                 Join Waitlist
+               </motion.button>
+             </motion.div>
           </div>
 
           {/* Right Column - FAQ Accordion */}
