@@ -146,13 +146,7 @@ export default function Footer() {
               
               {/* Left: Copyright */}
               <div className="flex items-center gap-4 text-sm">
-                <span className="font-medium">© 2025 Civila | Photos by</span>
-                <a 
-                  href="#" 
-                  className="underline hover:opacity-80 transition-opacity duration-300 font-medium"
-                >
-                  marisol dorantes
-                </a>
+                <span className="font-medium">© {new Date().getFullYear()} Hooman Inc — Built with love for pets and their people</span>
               </div>
 
               {/* Center: Social Icons */}
