@@ -8,6 +8,7 @@ import Testimonials from './components/Testimonials'
 import BlogAndFAQ from './components/BlogAndFAQ'
 import AppBanner from './components/AppBanner'
 import SocialsGallery from './components/SocialsGallery'
+import Newsletter from './components/Newsletter'
 
 export default function HomePage() {
   return (
@@ -20,6 +21,7 @@ export default function HomePage() {
       <WhyUs />
       <Testimonials />
       <BlogAndFAQ />
+      <Newsletter />
       <SocialsGallery />
     </main>
   )
