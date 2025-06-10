@@ -124,16 +124,23 @@ export default function Testimonials() {
           viewport={{ once: true, margin: "-150px" }}
         >
           {/* Badge */}
-          <motion.div variants={badgeVariants}>
-            <span className="inline-block bg-[#E95744] text-white text-sm px-3 py-1 rounded-full uppercase font-medium tracking-wide">
+          <motion.div
+            variants={badgeVariants}
+            className="mb-8"
+          >
+            <motion.span 
+              whileHover={{ scale: 1.05 }}
+              className="inline-flex items-center gap-2 bg-hooman-orange text-white px-6 py-3 rounded-full text-sm font-medium tracking-wide shadow-xl border border-hooman-orange/20"
+            >
+              <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
               Testimonials
-            </span>
+            </motion.span>
           </motion.div>
 
-          {/* Heading */}
+          {/* Headline */}
           <motion.h2
             variants={textVariants}
-            className="text-4xl md:text-5xl font-extrabold mt-6"
+            className="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight"
           >
             Just hear what other <br />
             pet parents are saying
@@ -142,7 +149,7 @@ export default function Testimonials() {
           {/* Subheading */}
           <motion.p
             variants={textVariants}
-            className="text-gray-400 max-w-2xl mx-auto mt-4"
+            className="text-base md:text-lg text-gray-400 leading-relaxed max-w-3xl mx-auto"
           >
             Real stories from real people — using Hooman to care smarter, stress less, and feel supported every day.
           </motion.p>
