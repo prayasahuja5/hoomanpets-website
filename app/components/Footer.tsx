@@ -39,7 +39,7 @@ export default function Footer() {
   return (
     <footer 
       ref={footerRef}
-      className={`bg-hooman-orange text-hooman-black transition-opacity duration-1000 ${
+      className={`bg-hooman-orange text-hooman-black mt-20 md:mt-32 transition-opacity duration-1000 ${
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
     >
