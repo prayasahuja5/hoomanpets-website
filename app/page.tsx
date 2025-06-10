@@ -7,6 +7,7 @@ import WhyUs from './components/WhyUs'
 import Testimonials from './components/Testimonials'
 import BlogAndFAQ from './components/BlogAndFAQ'
 import AppBanner from './components/AppBanner'
+import SocialsGallery from './components/SocialsGallery'
 
 export default function HomePage() {
   return (
@@ -19,6 +20,7 @@ export default function HomePage() {
       <WhyUs />
       <Testimonials />
       <BlogAndFAQ />
+      <SocialsGallery />
     </main>
   )
 } 
