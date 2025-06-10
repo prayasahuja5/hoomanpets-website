@@ -83,7 +83,7 @@ export default function Newsletter() {
               viewport={{ once: true }}
             >
               <span className="inline-flex items-center gap-2 bg-[#E95744] text-white px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wide">
-                Subscribe and Save 🐾
+                AI-Powered Insights 🧠
               </span>
             </motion.div>
 
@@ -95,7 +95,7 @@ export default function Newsletter() {
               viewport={{ once: true }}
               className="font-urbanist text-4xl md:text-5xl font-extrabold text-white leading-tight"
             >
-              Join Our Newsletter!
+              Stay Ahead of Pet Health
             </motion.h2>
 
             {/* Subtext */}
@@ -106,8 +106,30 @@ export default function Newsletter() {
               viewport={{ once: true }}
               className="text-gray-400 text-lg max-w-md leading-relaxed"
             >
-              Stay updated with new features, smart pet care tips & exclusive invites.
+              Get weekly AI insights, early health alerts, expert vet tips, and exclusive platform updates delivered to your inbox.
             </motion.p>
+
+            {/* Benefits List */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              viewport={{ once: true }}
+              className="space-y-3"
+            >
+              <div className="flex items-center gap-3 text-gray-300">
+                <div className="w-2 h-2 bg-[#E95744] rounded-full"></div>
+                <span className="text-sm">Predictive health recommendations</span>
+              </div>
+              <div className="flex items-center gap-3 text-gray-300">
+                <div className="w-2 h-2 bg-[#E95744] rounded-full"></div>
+                <span className="text-sm">Early access to new AI features</span>
+              </div>
+              <div className="flex items-center gap-3 text-gray-300">
+                <div className="w-2 h-2 bg-[#E95744] rounded-full"></div>
+                <span className="text-sm">Expert veterinary insights</span>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Right Column - Email Input */}
@@ -125,12 +147,12 @@ export default function Newsletter() {
                 transition={{ duration: 0.5, type: "spring" }}
                 className="text-center py-8"
               >
-                <div className="text-4xl mb-4">🐶</div>
+                <div className="text-4xl mb-4">🚀</div>
                 <p className="text-white text-xl font-semibold mb-2">
-                  Thanks for subscribing!
+                  Welcome to the future of pet care!
                 </p>
                 <p className="text-gray-400">
-                  You'll hear from us soon with exciting updates.
+                  You'll receive AI-powered insights and health tips soon.
                 </p>
               </motion.div>
             ) : (
@@ -144,7 +166,7 @@ export default function Newsletter() {
                     <input
                       id="newsletter-email"
                       type="email"
-                      placeholder="Your email address"
+                      placeholder="Enter your email for AI insights"
                       value={email}
                       onChange={(e) => {
                         setEmail(e.target.value)
@@ -169,7 +191,7 @@ export default function Newsletter() {
                         Subscribing...
                       </span>
                     ) : (
-                      'Subscribe →'
+                      'Get AI Insights →'
                     )}
                   </motion.button>
                 </div>
@@ -184,6 +206,17 @@ export default function Newsletter() {
                     {error}
                   </motion.p>
                 )}
+
+                {/* Privacy Notice */}
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ delay: 0.6 }}
+                  viewport={{ once: true }}
+                  className="text-xs text-gray-500 mt-3"
+                >
+                  We respect your privacy. Unsubscribe at any time. No spam, only valuable pet health insights.
+                </motion.p>
               </form>
             )}
           </motion.div>

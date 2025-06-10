@@ -22,8 +22,8 @@ export default function HomePage() {
       <WhyUs />
       <Testimonials />
       <BlogAndFAQ />
-      <Newsletter />
       <SocialsGallery />
+      <Newsletter />
       <Footer />
     </main>
   )
