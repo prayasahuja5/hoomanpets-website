@@ -9,6 +9,7 @@ import BlogAndFAQ from './components/BlogAndFAQ'
 import AppBanner from './components/AppBanner'
 import SocialsGallery from './components/SocialsGallery'
 import Newsletter from './components/Newsletter'
+import Footer from './components/Footer'
 
 export default function HomePage() {
   return (
@@ -23,6 +24,7 @@ export default function HomePage() {
       <BlogAndFAQ />
       <Newsletter />
       <SocialsGallery />
+      <Footer />
     </main>
   )
 } 
