@@ -140,7 +140,7 @@ export default function Testimonials() {
           {/* Headline */}
           <motion.h2
             variants={textVariants}
-            className="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight"
+            className="text-4xl md:text-[60px] font-extrabold text-white mb-6 leading-tight"
           >
             Just hear what other <br />
             pet parents are saying
@@ -183,28 +183,57 @@ export default function Testimonials() {
         </div>
       </div>
 
+      {/* Tablet Version - Single Row Marquee */}
+      <div className="hidden md:block lg:hidden mt-8">
+        <div className="relative overflow-hidden">
+          <div className="flex space-x-4 animate-scroll-left">
+            {extendedTestimonials.map((testimonial, index) => (
+              <div
+                key={`tablet-${testimonial.id}-${index}`}
+                className="bg-[#F5EDE2] text-[#1C1C1E] rounded-xl p-6 w-[280px] min-w-[280px] shadow-md hover:scale-105 hover:shadow-lg transition-transform duration-300 ease-in-out flex-shrink-0"
+              >
+                <div className="flex items-center space-x-4 mb-4">
+                  <Image
+                    src={testimonial.avatar}
+                    alt={`Avatar of ${testimonial.name}`}
+                    width={40}
+                    height={40}
+                    className="w-10 h-10 rounded-full object-cover"
+                  />
+                  <div>
+                    <p className="font-semibold text-[#1C1C1E]">{testimonial.name}</p>
+                    <p className="text-sm text-[#7A7A7A]">{testimonial.tagline}</p>
+                  </div>
+                </div>
+                <p className="text-sm leading-relaxed text-[#1C1C1E]">"{testimonial.text}"</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Mobile Version - Single Scrollable Row */}
       <div className="block md:hidden mt-8 -mx-6">
         <div className="flex space-x-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-6">
           {testimonials.map((testimonial) => (
             <div
               key={`mobile-${testimonial.id}`}
-              className="bg-[#F5EDE2] text-[#1C1C1E] rounded-xl p-6 w-[260px] min-w-[260px] shadow-md snap-start flex-shrink-0"
+              className="bg-[#F5EDE2] text-[#1C1C1E] rounded-xl p-4 w-[260px] min-w-[260px] shadow-md snap-start flex-shrink-0"
             >
-              <div className="flex items-center space-x-4 mb-4">
+              <div className="flex items-center space-x-3 mb-4">
                 <Image
                   src={testimonial.avatar}
                   alt={`Avatar of ${testimonial.name}`}
-                  width={40}
-                  height={40}
-                  className="w-10 h-10 rounded-full object-cover"
+                  width={36}
+                  height={36}
+                  className="w-9 h-9 rounded-full object-cover"
                 />
                 <div>
-                  <p className="font-semibold text-[#1C1C1E]">{testimonial.name}</p>
-                  <p className="text-sm text-[#7A7A7A]">{testimonial.tagline}</p>
+                  <p className="font-semibold text-[#1C1C1E] text-sm">{testimonial.name}</p>
+                  <p className="text-xs text-[#7A7A7A]">{testimonial.tagline}</p>
                 </div>
               </div>
-              <p className="text-sm leading-relaxed text-[#1C1C1E]">"{testimonial.text}"</p>
+              <p className="text-xs leading-relaxed text-[#1C1C1E]">"{testimonial.text}"</p>
             </div>
           ))}
         </div>
@@ -248,11 +277,26 @@ export default function Testimonials() {
           display: none;
         }
 
-        /* Hide marquee on mobile, show scroll instead */
+        /* Responsive behavior for different screen sizes */
         @media (max-width: 768px) {
           .animate-scroll-left,
           .animate-scroll-right {
             display: none;
+          }
+        }
+
+        /* Tablet: Show single row marquee instead of dual-row */
+        @media (min-width: 768px) and (max-width: 1024px) {
+          .animate-scroll-right {
+            display: none;
+          }
+        }
+
+        /* Ensure smooth scrolling on all devices */
+        @media (prefers-reduced-motion: reduce) {
+          .animate-scroll-left,
+          .animate-scroll-right {
+            animation: none;
           }
         }
       `}</style>
