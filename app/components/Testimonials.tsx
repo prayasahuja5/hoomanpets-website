@@ -49,9 +49,6 @@ const testimonials = [
   }
 ]
 
-// Create duplicated arrays for seamless infinite scroll
-const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials]
-
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -94,8 +91,8 @@ const textVariants = {
 }
 
 // Testimonial Card Component
-const TestimonialCard = ({ testimonial, index }: { testimonial: any, index: number }) => (
-  <div className="bg-[#F5EDE2] text-[#1C1C1E] rounded-xl p-6 w-[300px] min-w-[300px] shadow-md hover:scale-105 hover:shadow-lg transition-transform duration-300 ease-in-out">
+const TestimonialCard = ({ testimonial }: { testimonial: any }) => (
+  <div className="bg-[#F5EDE2] text-[#1C1C1E] rounded-xl p-6 w-[300px] min-w-[300px] shadow-md hover:scale-105 hover:shadow-lg transition-transform duration-300 ease-in-out flex-shrink-0">
     <div className="flex items-center space-x-4 mb-4">
       <Image
         src={testimonial.avatar}
@@ -114,6 +111,9 @@ const TestimonialCard = ({ testimonial, index }: { testimonial: any, index: numb
 )
 
 export default function Testimonials() {
+  // Create extended arrays for seamless scrolling
+  const extendedTestimonials = [...testimonials, ...testimonials, ...testimonials, ...testimonials]
+  
   return (
     <section className="bg-[#1C1C1E] text-white py-24 px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto text-center">
@@ -126,7 +126,7 @@ export default function Testimonials() {
           {/* Badge */}
           <motion.div variants={badgeVariants}>
             <span className="inline-block bg-[#E95744] text-white text-sm px-3 py-1 rounded-full uppercase font-medium tracking-wide">
-              Testimonial
+              Testimonials
             </span>
           </motion.div>
 
@@ -135,7 +135,8 @@ export default function Testimonials() {
             variants={textVariants}
             className="text-4xl md:text-5xl font-extrabold mt-6"
           >
-            Just hear what they're saying about us
+            Just hear what other <br />
+            pet parents are saying
           </motion.h2>
 
           {/* Subheading */}
@@ -143,43 +144,45 @@ export default function Testimonials() {
             variants={textVariants}
             className="text-gray-400 max-w-2xl mx-auto mt-4"
           >
-            Discover how Hooman helps pet parents feel supported, stay consistent, and get peace of mind — all powered by Ezra.
+            Real stories from real people — using Hooman to care smarter, stress less, and feel supported every day.
           </motion.p>
         </motion.div>
       </div>
 
-      {/* Marquee Rows */}
-      <div className="relative mt-16 space-y-6">
-        {/* Row 1 - Left to Right */}
-        <div className="flex space-x-6 animate-marquee">
-          {duplicatedTestimonials.map((testimonial, index) => (
-            <TestimonialCard 
-              key={`row1-${testimonial.id}-${index}`} 
-              testimonial={testimonial} 
-              index={index} 
-            />
-          ))}
+      {/* Dual Row Marquee Container */}
+      <div className="mt-16 space-y-8">
+        {/* Row 1 - Moving Left to Right */}
+        <div className="relative overflow-hidden">
+          <div className="flex space-x-6 animate-scroll-left">
+            {extendedTestimonials.map((testimonial, index) => (
+              <TestimonialCard 
+                key={`row1-${testimonial.id}-${index}`} 
+                testimonial={testimonial}
+              />
+            ))}
+          </div>
         </div>
 
-        {/* Row 2 - Right to Left (offset + opposite direction) */}
-        <div className="flex space-x-6 animate-marquee-reverse mt-4 md:ml-20">
-          {duplicatedTestimonials.map((testimonial, index) => (
-            <TestimonialCard 
-              key={`row2-${testimonial.id}-${index}`} 
-              testimonial={testimonial} 
-              index={index} 
-            />
-          ))}
+        {/* Row 2 - Moving Right to Left with Offset */}
+        <div className="relative overflow-hidden">
+          <div className="flex space-x-6 animate-scroll-right translate-x-20">
+            {extendedTestimonials.map((testimonial, index) => (
+              <TestimonialCard 
+                key={`row2-${testimonial.id}-${index}`} 
+                testimonial={testimonial}
+              />
+            ))}
+          </div>
         </div>
       </div>
 
       {/* Mobile Version - Single Scrollable Row */}
-      <div className="block md:hidden mt-8">
-        <div className="flex space-x-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 -mx-6 px-6">
+      <div className="block md:hidden mt-8 -mx-6">
+        <div className="flex space-x-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-6">
           {testimonials.map((testimonial) => (
             <div
               key={`mobile-${testimonial.id}`}
-              className="bg-[#F5EDE2] text-[#1C1C1E] rounded-xl p-6 w-[260px] min-w-[260px] shadow-md snap-start"
+              className="bg-[#F5EDE2] text-[#1C1C1E] rounded-xl p-6 w-[260px] min-w-[260px] shadow-md snap-start flex-shrink-0"
             >
               <div className="flex items-center space-x-4 mb-4">
                 <Image
@@ -201,22 +204,32 @@ export default function Testimonials() {
       </div>
 
       <style jsx>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-100%); }
+        @keyframes scroll-left {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
         }
 
-        @keyframes marquee-reverse {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(0); }
+        @keyframes scroll-right {
+          0% {
+            transform: translateX(-50%);
+          }
+          100% {
+            transform: translateX(0);
+          }
         }
 
-        .animate-marquee {
-          animation: marquee 30s linear infinite;
+        .animate-scroll-left {
+          animation: scroll-left 40s linear infinite;
+          width: fit-content;
         }
 
-        .animate-marquee-reverse {
-          animation: marquee-reverse 35s linear infinite;
+        .animate-scroll-right {
+          animation: scroll-right 45s linear infinite;
+          width: fit-content;
         }
 
         .scrollbar-hide {
@@ -226,6 +239,14 @@ export default function Testimonials() {
         
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
+        }
+
+        /* Hide marquee on mobile, show scroll instead */
+        @media (max-width: 768px) {
+          .animate-scroll-left,
+          .animate-scroll-right {
+            display: none;
+          }
         }
       `}</style>
     </section>
